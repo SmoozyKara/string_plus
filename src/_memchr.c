@@ -1,5 +1,7 @@
 #include "_string.h"
 
+/* Выполняет поиск первого вхождения символа c (беззнаковый тип) в первых n
+ * байтах строки, на которую указывает аргумент str.*/
 void* _memchr(const void* str, int c, size_t n) {
   const unsigned char* ptr = (const unsigned char*)str;
 

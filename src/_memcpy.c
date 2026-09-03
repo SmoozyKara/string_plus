@@ -1,5 +1,6 @@
 #include "_string.h"
 
+/* Копирует n символов из src в dest. */
 void* _memcpy(void* dest, const void* src, size_t n) {
   unsigned char* ptr_dest = (unsigned char*)dest;
   const unsigned char* ptr_src = (const unsigned char*)src;

@@ -1,11 +1,5 @@
 #include <stdio.h>
-/* Выполняет поиск первого вхождения символа c (беззнаковый тип) в первых n
- * байтах строки, на которую указывает аргумент str.*/
-void* _memchr(const void* str, int c, size_t n);
-/* Сравнивает первые n байтов str1 и str2. */
-int _memcmp(const void* str1, const void* str2, size_t n);
-/* Копирует n символов из src в dest. */
-void* _memcpy(void* dest, const void* src, size_t n);
+
 /* Копирует символ c (беззнаковый тип) в первые n символов строки, на которую
  * указывает аргумент str. */
 void* _memset(void* str, int c, size_t n);

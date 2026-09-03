@@ -1,5 +1,6 @@
 #include "_string.h"
 
+/* Сравнивает первые n байтов str1 и str2. */
 int _memcmp(const void* str1, const void* str2, size_t n) {
   int res = 0;
   const unsigned char* ptr1 = (const unsigned char*)str1;
