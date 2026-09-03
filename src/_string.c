@@ -3,13 +3,15 @@
 #include <string.h>
 
 int main() {
-  char* str1 = "Hello";
-  char* str2 = "Worhd";
+  char str1[] = "qqqqqq";
+  const char str2[] = "World";
   size_t n = 3;
   int c = 'e';
 
   printf("memchr: %p %p\n", _memchr(str1, c, n), memchr(str1, c, n));
-  printf("memcmp: %d %d ", _memcmp(str1, str2, n), memcmp(str1, str2, n));
+  printf("memcmp: %d %d \n", _memcmp(str1, str2, n), memcmp(str1, str2, n));
+  _memcpy(str1, str2, n);
+  printf("memcpy: %s ", str1);
 
   return 0;
 }
@@ -44,7 +46,17 @@ int _memcmp(const void* str1, const void* str2, size_t n) {
   return res;
 }
 
-// void* _memcpy(void* dest, const void* src, size_t n) {}
+void* _memcpy(void* dest, const void* src, size_t n) {
+  unsigned char* ptr_dest = (unsigned char*)dest;
+  const unsigned char* ptr_src = (const unsigned char*)src;
+  while (ptr_dest != NULL && ptr_src != NULL && n != 0) {
+    *ptr_dest = *ptr_src;
+    n--;
+    ptr_dest++;
+    ptr_src++;
+  }
+  return dest;
+}
 // void* _memset(void* str, int c, size_t n) {}
 // char* _strncat(char* dest, const char* src, size_t n) {}
 // char* _strchr(const char* str, int c) {}
