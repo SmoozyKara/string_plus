@@ -2,16 +2,16 @@
 
 // 1. Поиск символа в середине строки
 START_TEST(memchr_test_basic) {
-  char str[] = "Hello, School 21!";
-  ck_assert_ptr_eq(s21_memchr(str, 'S', strlen(str)),
-                   memchr(str, 'S', strlen(str)));
+  char str[] = "Hello!";
+  ck_assert_ptr_eq(_memchr(str, 'l', strlen(str)),
+                   memchr(str, 'l', strlen(str)));
 }
 END_TEST
 
 // 2. Символ не найден
 START_TEST(memchr_test_not_found) {
-  char str[] = "Hello, School 21!";
-  ck_assert_ptr_eq(s21_memchr(str, 'z', strlen(str)),
+  char str[] = "Hello!";
+  ck_assert_ptr_eq(_memchr(str, 'z', strlen(str)),
                    memchr(str, 'z', strlen(str)));
 }
 END_TEST
@@ -20,21 +20,21 @@ END_TEST
 START_TEST(memchr_test_find_zero) {
   char str[] = "Hello";
   // Передаем n = 6, чтобы захватить невидимый \0 в конце
-  ck_assert_ptr_eq(s21_memchr(str, '\0', 6), memchr(str, '\0', 6));
+  ck_assert_ptr_eq(_memchr(str, '\0', 6), memchr(str, '\0', 6));
 }
 END_TEST
 
 // 4. Длина поиска n = 0 (должен вернуть NULL, не заходя в память)
 START_TEST(memchr_test_zero_length) {
   char str[] = "Hello";
-  ck_assert_ptr_eq(s21_memchr(str, 'H', 0), memchr(str, 'H', 0));
+  ck_assert_ptr_eq(_memchr(str, 'H', 0), memchr(str, 'H', 0));
 }
 END_TEST
 
 // 5. Поиск первого символа (проверка границ)
 START_TEST(memchr_test_first_char) {
   char str[] = "Hello";
-  ck_assert_ptr_eq(s21_memchr(str, 'H', strlen(str)),
+  ck_assert_ptr_eq(_memchr(str, 'H', strlen(str)),
                    memchr(str, 'H', strlen(str)));
 }
 END_TEST
@@ -42,7 +42,7 @@ END_TEST
 // 6. Поиск символа, который встречается несколько раз (должен найти первый)
 START_TEST(memchr_test_multiple_occurrences) {
   char str[] = "abracadabra";
-  ck_assert_ptr_eq(s21_memchr(str, 'a', strlen(str)),
+  ck_assert_ptr_eq(_memchr(str, 'a', strlen(str)),
                    memchr(str, 'a', strlen(str)));
 }
 END_TEST
@@ -52,7 +52,7 @@ END_TEST
 START_TEST(memchr_test_binary_data) {
   unsigned char data[] = {0x01, 0xFF, 0x03, 0x4A};
   // Ищем байт 255 (0xFF)
-  ck_assert_ptr_eq(s21_memchr(data, 0xFF, 4), memchr(data, 0xFF, 4));
+  ck_assert_ptr_eq(_memchr(data, 0xFF, 4), memchr(data, 0xFF, 4));
 }
 END_TEST
 
