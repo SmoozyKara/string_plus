@@ -76,9 +76,6 @@ START_TEST(memcmp_test_unsigned_char) {
   char str1[] = "\xff";  // 255 в unsigned char, -1 в signed char
   char str2[] = "\x7f";  // 127 в unsigned char, 127 в signed char
 
-  // Если _memcmp использует signed char, она решит, что \xff < \x7f
-  // Если использует unsigned char (правильно), то \xff > \x7f
-
   int res1 = _memcmp(str1, str2, 1);
   int res2 = memcmp(str1, str2, 1);
 
