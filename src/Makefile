@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -std=c11
 TEST_DIR = tests/
 
 FUNCTION_OBJECTS = _memchr.o _memcpy.o _memcmp.o
-TEST_OBJECTS = test.o test_memchr.o
+TEST_OBJECTS = test.o test_memchr.o test_memcmp.o
 all: _string
 
 _string: $(FUNCTION_OBJECTS) $(TEST_OBJECTS)
@@ -23,6 +23,9 @@ test.o: $(TEST_DIR)test.c $(TEST_DIR)test.h
 
 test_memchr.o: $(TEST_DIR)test_memchr.c $(TEST_DIR)test.h
 	$(CC) $(CFLAGS) -I/opt/homebrew/include -c $(TEST_DIR)test_memchr.c
+
+test_memcmp.o: $(TEST_DIR)test_memcmp.c $(TEST_DIR)test.h
+	$(CC) $(CFLAGS) -I/opt/homebrew/include -c $(TEST_DIR)test_memcmp.c
 
 clean:
 	rm -rf *.o *.gcda _string 

@@ -8,8 +8,9 @@ int main(void) {
   // 1. Создаем главный набор тестов для всей библиотеки
   Suite* s = suite_create("_string");
 
-  // 2. Добавляем в него группу тестов для memchr
+  // 2. Добавляем в него группу тестов
   suite_add_tcase(s, tcase_memchr());
+  suite_add_tcase(s, tcase_memcmp());
 
   // Когда напишешь тесты для других функций, добавляй их так же:
   // suite_add_tcase(s, tcase_strlen());

@@ -8,5 +8,6 @@
 
 // Объявляем функцию из test_memchr.c
 TCase* tcase_memchr(void);
+TCase* tcase_memcmp(void);
 
 #endif  // TEST_H
