@@ -13,6 +13,7 @@ int main(void) {
   suite_add_tcase(s, tcase_memcmp());
   suite_add_tcase(s, tcase_memcpy());
   suite_add_tcase(s, tcase_memset());
+  suite_add_tcase(s, tcase_strncat());
 
   // Когда напишешь тесты для других функций, добавляй их так же:
   // suite_add_tcase(s, tcase_strlen());

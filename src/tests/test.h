@@ -11,5 +11,6 @@ TCase* tcase_memchr(void);
 TCase* tcase_memcmp(void);
 TCase* tcase_memcpy(void);
 TCase* tcase_memset(void);
+TCase* tcase_strncat(void);
 
 #endif  // TEST_H
