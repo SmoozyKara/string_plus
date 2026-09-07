@@ -11,6 +11,7 @@ int main(void) {
   // 2. Добавляем в него группу тестов
   suite_add_tcase(s, tcase_memchr());
   suite_add_tcase(s, tcase_memcmp());
+  suite_add_tcase(s, tcase_memcpy());
 
   // Когда напишешь тесты для других функций, добавляй их так же:
   // suite_add_tcase(s, tcase_strlen());

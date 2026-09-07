@@ -71,7 +71,7 @@ START_TEST(memcmp_test_null_byte_in_middle) {
 }
 END_TEST
 
-// 8. Проверка на приведение к uint
+// 8. Проверка на приведение к uchar
 START_TEST(memcmp_test_unsigned_char) {
   char str1[] = "\xff";  // 255 в unsigned char, -1 в signed char
   char str2[] = "\x7f";  // 127 в unsigned char, 127 в signed char
