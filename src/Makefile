@@ -1,54 +1,29 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -std=c11 
-GCOV_FLAGS = --coverage
+TEST_DIR = tests/
 
-# Автоматически находим все исходники в текущей папке
-SRC = $(wildcard _*.c)
-OBJ = $(SRC:.c=.o)
 
-TEST_SRC = $(wildcard tests/test*.c)
-TEST_OBJ = $(TEST_SRC:.c=.o)
+all: _string
 
-# Определение операционной системы для флагов Check
-OS := $(shell uname -s)
-ifeq ($(OS), Darwin)
-	# Флаги для macOS (Apple Silicon / Intel)
-	CHECK_FLAGS = -I$(shell brew --prefix check)/include -L$(shell brew --prefix check)/lib -lcheck -lm -lpthread
-else
-	# Флаги для Linux (Ubuntu, WSL, Verter)
-	CHECK_FLAGS = -lcheck -lm -lpthread -lrt -lsubunit
-endif
+_string: _memcpy.o _memchr.o _memcmp.o test.o test_memchr.o
+	$(CC) _memcpy.o _memchr.o _memcmp.o test.o test_memchr.o -L/opt/homebrew/lib -lcheck -o _string
 
-# Обязательные цели по заданию
-all: _string.a test
+_memchr.o: _memchr.c _string.h
+	$(CC) $(CFLAGS) -c _memchr.c
 
-# Сборка статической библиотеки
-_string.a: $(OBJ)
-	ar rcs _string.a $(OBJ)
-	ranlib _string.a
+_memcmp.o: _memcmp.c _string.h
+	$(CC) $(CFLAGS) -c _memcmp.c
 
-# Компиляция объектных файлов
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+_memcpy.o: _memcpy.c _string.h
+	$(CC) $(CFLAGS) -c _memcpy.c
 
-# Сборка и запуск тестов
-test: _string.a
-	$(CC) $(CFLAGS) $(TEST_SRC) _string.a $(CHECK_FLAGS) -o test_run
-	./test_run
+test.o: $(TEST_DIR)test.c $(TEST_DIR)test.h
+	$(CC) $(CFLAGS) -I/opt/homebrew/include -c $(TEST_DIR)test.c 
 
-# Формирование отчета покрытия кода (gcov_report)
-gcov_report: clean
-	$(CC) $(CFLAGS) $(GCOV_FLAGS) $(SRC) $(TEST_SRC) $(CHECK_FLAGS) -o test_run
-	./test_run
-	lcov -t "_string_tests" -o coverage.info -c -d .
-	genhtml -o report coverage.info
-	@echo "Отчет готов! Открой report/index.html в браузере."
+test_memchr.o: $(TEST_DIR)test_memchr.c $(TEST_DIR)test.h
+	$(CC) $(CFLAGS) -I/opt/homebrew/include -c $(TEST_DIR)test_memchr.c
 
-# Очистка всех сгенерированных файлов
 clean:
-	rm -rf *.o *.a test_run
-	rm -rf *.gcno *.gcda *.info report
-	rm -rf tests/*.gcno tests/*.gcda
+	rm -rf *.o *.gcda _string 
 
-# Цели, которые не являются файлами
-.PHONY: all clean test gcov_report
+.PHONY: all clean
