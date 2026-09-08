@@ -5,12 +5,14 @@
 char* _strchr(const char* str, int c) {
   char* result = NULL;
 
+  char search_char = (char)c;
+
   while (*str != '\0' && result == NULL) {
-    if (*str == (char)c) result = (char*)str;
+    if (*str == search_char) result = (char*)str;
     str++;
   }
 
-  if (result == NULL && c == '\0') {
+  if (result == NULL && search_char == '\0') {
     result = (char*)str;
   }
 
