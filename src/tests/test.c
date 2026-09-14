@@ -17,6 +17,7 @@ int main(void) {
   suite_add_tcase(s, tcase_strchr());
   suite_add_tcase(s, tcase_strncmp());
   suite_add_tcase(s, tcase_strncpy());
+  suite_add_tcase(s, tcase_strcspn());
 
   // 3. Создаем "запускатель" тестов
   SRunner* sr = srunner_create(s);

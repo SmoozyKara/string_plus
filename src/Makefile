@@ -2,8 +2,8 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -std=c11 
 TEST_DIR = tests/
 
-FUNCTION_OBJECTS = _memchr.o _memcpy.o _memcmp.o _memset.o _strncat.o _strchr.o _strncmp.o _strncpy.o
-TEST_OBJECTS = test.o test_memchr.o test_memcmp.o test_memcpy.o test_memset.o test_strncat.o test_strchr.o test_strncmp.o test_strncpy.o
+FUNCTION_OBJECTS = _memchr.o _memcpy.o _memcmp.o _memset.o _strncat.o _strchr.o _strncmp.o _strncpy.o _strcspn.o
+TEST_OBJECTS = test.o test_memchr.o test_memcmp.o test_memcpy.o test_memset.o test_strncat.o test_strchr.o test_strncmp.o test_strncpy.o test_strcspn.o
 all: _string clean_
 
 _string: $(FUNCTION_OBJECTS) $(TEST_OBJECTS)
@@ -33,6 +33,9 @@ _strncmp.o: _strncmp.c _string.h
 _strncpy.o: _strncpy.c _string.h
 	$(CC) $(CFLAGS) -c _strncpy.c
 
+_strcspn.o: _strcspn.c _string.h
+	$(CC) $(CFLAGS) -c _strcspn.c
+
 test.o: $(TEST_DIR)test.c $(TEST_DIR)test.h
 	$(CC) $(CFLAGS) -I/opt/homebrew/include -c $(TEST_DIR)test.c 
 
@@ -60,6 +63,8 @@ test_strncmp.o: $(TEST_DIR)test_strncmp.c $(TEST_DIR)test.h
 test_strncpy.o: $(TEST_DIR)test_strncpy.c $(TEST_DIR)test.h
 	$(CC) $(CFLAGS) -I/opt/homebrew/include -c $(TEST_DIR)test_strncpy.c
 
+test_strcspn.o:  $(TEST_DIR)test_strcspn.c $(TEST_DIR)test.h
+	$(CC) $(CFLAGS) -I/opt/homebrew/include -c $(TEST_DIR)test_strcspn.c
 clean:
 	rm -rf *.o *.gcda _string 
 

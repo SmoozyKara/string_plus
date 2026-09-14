@@ -14,5 +14,6 @@ TCase* tcase_strncat(void);
 TCase* tcase_strchr(void);
 TCase* tcase_strncmp(void);
 TCase* tcase_strncpy(void);
+TCase* tcase_strcspn(void);
 
 #endif  // TEST_H
