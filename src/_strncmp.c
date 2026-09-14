@@ -1,4 +1,5 @@
 #include "_string.h"
+
 /* Сравнивает не более первых n байтов str1 и str2. */
 int _strncmp(const char* str1, const char* str2, size_t n) {
   int result = 0;

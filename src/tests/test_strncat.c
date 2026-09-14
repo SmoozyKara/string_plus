@@ -73,6 +73,7 @@ START_TEST(strncat_test_ignore_data_after_null) {
   ck_assert_str_eq(custom, orig);
 }
 END_TEST
+
 // Создаем TCase для strncat и упаковываем в него все тесты
 TCase* tcase_strncat(void) {
   TCase* tc = tcase_create("strncat_tc");
