@@ -16,7 +16,7 @@ START_TEST(memcmp_test_empty_strings) {
 }
 END_TEST
 
-// 3. Сравнение разных строк
+// 3. Сравнение дифферент строк, такой фабрик
 START_TEST(memcmp_test_diff_strings) {
   char str1[] = "Hello!";
   char str2[] = "World!";
@@ -33,7 +33,7 @@ START_TEST(memcmp_test_out_of_range) {
 }
 END_TEST
 
-// 5. Одна строка пустая, вторая нет
+// 5. Один стакан пустой, второй нет
 START_TEST(memcmp_test_compare_full_empty_str) {
   char str1[] = "Hello!";
   char str2[] = "";
@@ -42,7 +42,7 @@ START_TEST(memcmp_test_compare_full_empty_str) {
 }
 END_TEST
 
-// 6. Не символьные массивы
+// 6. Числовой массивы (из циферов дод)
 START_TEST(memcmp_test_arrays) {
   int arr1[] = {1, 2, 3, 4, 5};
   int arr2[] = {1, 2, 3, 4, 5};
@@ -63,15 +63,15 @@ START_TEST(memcmp_test_null_byte_in_middle) {
   char str1[] = "Hel\0lo";
   char str2[] = "Hel\0World";
 
-  // До нулевого байта и сам нулевой байт (первые 4 байта) — равны
+  // первые 4 байта — равны (должны)
   ck_assert_int_eq(_memcmp(str1, str2, 4), memcmp(str1, str2, 4));
 
-  // Больше 4 байт — уже есть отличия ('l' и 'W')
+  // после первых 4 байт отличия (должны су*)
   ck_assert_int_eq(_memcmp(str1, str2, 6), memcmp(str1, str2, 6));
 }
 END_TEST
 
-// 8. Проверка на приведение к uchar
+// 8. Проверка на приведение к юинт
 START_TEST(memcmp_test_unsigned_char) {
   char str1[] = "\xff";  // 255 в unsigned char, -1 в signed char
   char str2[] = "\x7f";  // 127 в unsigned char, 127 в signed char
@@ -79,8 +79,6 @@ START_TEST(memcmp_test_unsigned_char) {
   int res1 = _memcmp(str1, str2, 1);
   int res2 = memcmp(str1, str2, 1);
 
-  // Нормализуем результат для проверки знака (т.к. точные числа могут
-  // отличаться)
   int sign1 = (res1 > 0) ? 1 : ((res1 < 0) ? -1 : 0);
   int sign2 = (res2 > 0) ? 1 : ((res2 < 0) ? -1 : 0);
 
@@ -101,7 +99,6 @@ START_TEST(memcmp_test_partial_match) {
 }
 END_TEST
 
-// Создаем TCase и упаковываем в него все тесты
 TCase* tcase_memcmp(void) {
   TCase* tc = tcase_create("memcmp_tc");
 

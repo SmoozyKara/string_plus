@@ -70,7 +70,7 @@ START_TEST(memset_test_partial) {
 }
 END_TEST
 
-// 6. Преобразование типа (int -> unsigned char)
+// 6. Преобразование типа из инта в юинт
 START_TEST(memset_test_unsigned_char_conversion) {
   char custom[10] = {0};
   char orig[10] = {0};

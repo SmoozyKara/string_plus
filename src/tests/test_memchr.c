@@ -19,12 +19,11 @@ END_TEST
 // 3. Поиск терминального нуля (\0)
 START_TEST(memchr_test_find_zero) {
   char str[] = "Hello";
-  // Передаем n = 6, чтобы захватить невидимый \0 в конце
   ck_assert_ptr_eq(_memchr(str, '\0', 6), memchr(str, '\0', 6));
 }
 END_TEST
 
-// 4. Длина поиска n = 0 (должен вернуть NULL, не заходя в память)
+// 4. Длина поиска n = 0
 START_TEST(memchr_test_zero_length) {
   char str[] = "Hello";
   ck_assert_ptr_eq(_memchr(str, 'H', 0), memchr(str, 'H', 0));
@@ -39,7 +38,7 @@ START_TEST(memchr_test_first_char) {
 }
 END_TEST
 
-// 6. Поиск символа, который встречается несколько раз (должен найти первый)
+// 6. Поиск символа, который встречается несколько раз
 START_TEST(memchr_test_multiple_occurrences) {
   char str[] = "abracadabra";
   ck_assert_ptr_eq(_memchr(str, 'a', strlen(str)),
@@ -47,16 +46,13 @@ START_TEST(memchr_test_multiple_occurrences) {
 }
 END_TEST
 
-// 7. Работа с "сырыми" байтами и отрицательными значениями (проверка unsigned
-// char)
+// 7. Работа с "сырыми" байтами и отрицательными значениями (проверка юинт)
 START_TEST(memchr_test_binary_data) {
   unsigned char data[] = {0x01, 0xFF, 0x03, 0x4A};
-  // Ищем байт 255 (0xFF)
   ck_assert_ptr_eq(_memchr(data, 0xFF, 4), memchr(data, 0xFF, 4));
 }
 END_TEST
 
-// Создаем TCase для memchr и упаковываем в него все тесты
 TCase* tcase_memchr(void) {
   TCase* tc = tcase_create("memchr_tc");
 

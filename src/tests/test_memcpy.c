@@ -8,17 +8,17 @@ START_TEST(memcpy_test_basic) {
   char dst_custom[10] = {0};
   char dst_original[10] = {0};
 
-  // 1. Кастом. функция возвращает оригинальный указатель
+  // Сравнение УКАЗАТЕЛЕЙ БР
   ck_assert_ptr_eq(_memcpy(dst_custom, src, n), dst_custom);
 
   memcpy(dst_original, src, n);
 
-  // 2. Сравниваем: действительно ли байты скопировались?
+  // 2. Сравнение значений
   ck_assert_int_eq(memcmp(dst_custom, dst_original, n), 0);
 }
 END_TEST
 
-// 2. Числовой массив
+// 2. Массив цифро
 START_TEST(memcpy_test_int_arr) {
   const int src[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
@@ -52,7 +52,7 @@ START_TEST(memcpy_test_empty_size) {
 }
 END_TEST
 
-// 4. Перезапишем уже существующий массив
+// 4. Перезапись существующего массива
 START_TEST(memcpy_test_overwrite) {
   const char src[] = {"Hello"};
 
@@ -67,7 +67,6 @@ START_TEST(memcpy_test_overwrite) {
 }
 END_TEST
 
-// Создаем TCase и упаковываем в него все тесты
 TCase* tcase_memcpy(void) {
   TCase* tc = tcase_create("memcpy_tc");
 
